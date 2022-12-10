@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ЛР 3</title>
+    <style>
+        table, tr, th, td {
+        border: 1px solid black;
+        text-align: center;
+        }
+    </style>
+    <script>
+        function tree(element,treeelem,depth)
+        {
+            console.log("Drawing "+element.nodeName)
+            children = element.childNodes
+            children.forEach(function (name, index) {
+                if (name.nodeName.toLowerCase() != "#text") {
+                
+                treeelem.textContent += ('\u00A0'.repeat(depth))+""+name.nodeName.toLowerCase()+"\n"
+                if (calcChildren(name) != 0 && name.if != "tree")
+                {
+                    tree(name,treeelem,depth+2)
+                }
+                }
+            });
+
+        }
+        function printtree() {
+            document.getElementById("tree").textContent = ""
+            tree(document,document.getElementById('tree'),2)
+
+        }
+        function calcChildren(element) {
+            children = element.childNodes
+            let counter=0
+            children.forEach(function (name, index) {
+                if (name.nodeName.toLowerCase() != "#text") {
+                    counter+=2
+                }
+            })
+            return counter;
+        }
+
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="3">Вторник</th>
+        </tr>
+        <tr>
+            <td>Время</td>
+            <td>ЧС</td>
+            <td>ЗН</td>
+        </tr>
+        <tr>
+            <td>8:30</td>
+            <td rowspan="2">Электротехника</td>
+            <td rowspan="2">ЯИП (Лабораторная)</td>
+
+        </tr>
+        <tr>
+            <td>10:15</td>
+        </tr>
+        <tr>
+            <td>12:00</td> 
+            <td colspan="2">ЯИП (Лекции)</td>
+        </tr>
+        <tr>
+            <td>13:50</td>
+            <td colspan="2" >Базы данных</td>
+        </tr>
+    </table>
+    <button onclick="printtree()">gettree</button>
+    <div id="tree" style="white-space: pre-line;"></div>
+</body>
+</html>
